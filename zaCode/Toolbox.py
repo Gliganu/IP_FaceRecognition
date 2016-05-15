@@ -3,6 +3,7 @@ from sklearn.decomposition import RandomizedPCA
 import cv2
 from sklearn.neural_network import BernoulliRBM
 import scipy as sp
+import zaCode.Visualizer as Visualizer
 
 from scipy.ndimage.filters import convolve
 
@@ -22,13 +23,19 @@ def printStatistics(people):
     print("n_classes: %d " % n_classes)
 
 
-def performRBM(xTrain, xTest,n_components):
+def performRBM(xTrain, xTest,n_components, withVisualization = False):
     print("Performing RBM...")
 
     rbm = BernoulliRBM(n_components=n_components, learning_rate=0.01, batch_size=10, n_iter=50, verbose=True, random_state=None).fit(xTrain)
 
     xTrain = rbm.transform(xTrain)
     xTest = rbm.transform(xTest)
+
+    #for Olivetti
+    if withVisualization:
+        comp = rbm.components_
+        image_shape = (64, 64)
+        Visualizer.plot_gallery('RBM componenets', comp[:16],image_shape, 4,4)
 
     return xTrain, xTest
 
