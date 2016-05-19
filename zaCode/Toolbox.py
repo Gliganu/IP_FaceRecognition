@@ -13,14 +13,10 @@ def printStatistics(people):
     X = people.data
     n_features = X.shape[1]
 
-    target_names = people.target_names
-    n_classes = target_names.shape[0]
-
-    print("H = {}, W = {}".format(h,w))
-    print("Total dataset size:")
+    print("Image shape: H = {}, W = {}".format(h,w))
+    print("Total dataset size: {}".format(n_samples))
     print("n_images: %d " % n_samples)
     print("n_features: %d " % n_features)
-    print("n_classes: %d " % n_classes)
 
 
 def performRBM(xTrain, xTest,n_components, withVisualization = False):
@@ -83,31 +79,6 @@ def nudge_dataset(X, Y,width,height):
     Y = np.concatenate([Y for _ in range(5)], axis=0)
     return X, Y
 
-# def nudge(X, y,width,height):
-# 	# initialize the translations to shift the image one pixel
-# 	# up, down, left, and right, then initialize the new data
-# 	# matrix and targets
-# 	translations = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-# 	data = []
-# 	target = []
-#
-# 	# loop over each of the digits
-# 	for (image, label) in zip(X, y):
-# 		# pixel intensities to a width x height 'image'
-# 		image = image.reshape(width, height)
-#
-# 		# loop over the translations
-# 		for (tX, tY) in translations:
-# 			# translate the image
-# 			M = np.float32([[1, 0, tX], [0, 1, tY]])
-# 			trans = cv2.warpAffine(image, M, (width, height))
-#
-# 			# update the list of data and target
-# 			data.append(trans.flatten())
-# 			target.append(label)
-#
-# 	# return a tuple of the data matrix and targets
-# 	return np.array(data), np.array(target)
 
 
 def scale(X):

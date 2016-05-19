@@ -13,6 +13,8 @@ def makePredictionForOlivetti():
     X = people.data
     y = people.target
 
+    Toolbox.printStatistics(people)
+
     #Visualize the dataset
     Visualizer.plot_gallery('Initial pics', X[:16], (64, 64), 4, 4)
 
@@ -39,7 +41,7 @@ def makePredictionForOlivetti():
 
 def makePredictionForLfwPeople():
     # get dataset
-    people = FileManager.getLfwPeople(min_faces_per_person=70, resize=0.4)
+    people = FileManager.getLfwPeople(min_faces_per_person=35, resize=0.4)
 
     Toolbox.printStatistics(people)
     n_samples, h, w = people.images.shape
